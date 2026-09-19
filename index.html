@@ -4,380 +4,109 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0a0a0a">
-<title>Recap Studio — Movie Recap Builder</title>
+<title>Recap Studio</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;600;700;900&family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#0a0a0a;--sur:#131313;--sur2:#1a1a1a;--sur3:#232323;
-  --line:#282828;--y:#f5c518;--y-s:rgba(245,197,24,.12);--y-d:rgba(245,197,24,.4);
-  --red:#e50914;--grn:#4ade80;--blu:#60a5fa;--prp:#a78bfa;
-  --tx:#e8e8e8;--tx2:#a0a0a0;--mu:#666;
-  --r:10px;--mono:'JetBrains Mono',monospace;
-}
+:root{--bg:#0a0a0a;--sur:#131313;--sur2:#1a1a1a;--sur3:#232323;--line:#282828;--y:#f5c518;--y-s:rgba(245,197,24,.12);--y-d:rgba(245,197,24,.4);--red:#e50914;--grn:#4ade80;--tx:#e8e8e8;--tx2:#a0a0a0;--mu:#666;--r:10px;--mono:'JetBrains Mono',monospace}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{
-  background:var(--bg);color:var(--tx);
-  font-family:'Noto Sans Myanmar','Inter',sans-serif;
-  font-size:14px;line-height:1.55;min-height:100vh;
-  padding-bottom:120px;overscroll-behavior-y:none;
-  -webkit-font-smoothing:antialiased;
-}
+body{background:var(--bg);color:var(--tx);font-family:'Noto Sans Myanmar','Inter',sans-serif;font-size:14px;line-height:1.55;min-height:100vh;padding-bottom:120px;overscroll-behavior-y:none;-webkit-font-smoothing:antialiased}
 button,input,textarea,select{font-family:inherit;color:inherit;font-size:inherit}
 button{border:none;background:none;cursor:pointer}
-a{color:inherit;text-decoration:none}
-
-/* ═══ NAV ═══ */
-nav{
-  position:sticky;top:0;z-index:100;
-  background:rgba(10,10,10,.94);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--line);
-  padding:11px 14px;
-  display:flex;align-items:center;gap:10px;
-}
-.logo{
-  width:34px;height:34px;border-radius:9px;
-  background:linear-gradient(135deg,#f5c518,#e0a800);
-  color:#000;font-weight:900;font-size:17px;
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;box-shadow:0 4px 14px rgba(245,197,24,.25);
-}
+nav{position:sticky;top:0;z-index:100;background:rgba(10,10,10,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:11px 14px;display:flex;align-items:center;gap:10px}
+.logo{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#f5c518,#e0a800);color:#000;font-weight:900;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 14px rgba(245,197,24,.25)}
 .nav-t{font-weight:800;font-size:14.5px;flex:1;letter-spacing:-.01em}
-.nav-badge{
-  font-size:9.5px;font-family:var(--mono);font-weight:700;
-  background:var(--y-s);color:var(--y);
-  padding:3px 7px;border-radius:5px;
-  border:1px solid var(--y-d);letter-spacing:.05em;
-}
-
-/* ═══ TABS ═══ */
-.tabs{
-  display:flex;gap:6px;padding:12px 14px 0;
-  overflow-x:auto;scrollbar-width:none;
-}
+.nav-badge{font-size:9.5px;font-family:var(--mono);font-weight:700;background:var(--y-s);color:var(--y);padding:3px 7px;border-radius:5px;border:1px solid var(--y-d);letter-spacing:.05em}
+.tabs{display:flex;gap:6px;padding:12px 14px 0;overflow-x:auto;scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
-.tab{
-  padding:9px 13px;border-radius:9px;
-  font-size:12.5px;font-weight:700;
-  background:var(--sur2);color:var(--tx2);
-  white-space:nowrap;flex-shrink:0;
-  transition:.15s;border:1px solid transparent;
-  display:flex;align-items:center;gap:6px;
-}
+.tab{padding:9px 13px;border-radius:9px;font-size:12.5px;font-weight:700;background:var(--sur2);color:var(--tx2);white-space:nowrap;flex-shrink:0;transition:.15s;border:1px solid transparent;display:flex;align-items:center;gap:6px}
 .tab.on{background:var(--y);color:#000;border-color:var(--y)}
-.tab .cnt{
-  font-family:var(--mono);font-size:10px;
-  background:rgba(0,0,0,.2);padding:1px 5px;
-  border-radius:20px;
-}
-.tab.on .cnt{background:rgba(0,0,0,.25)}
-
-/* ═══ SECTION ═══ */
+.tab .cnt{font-family:var(--mono);font-size:10px;background:rgba(0,0,0,.2);padding:1px 5px;border-radius:20px}
 .sec{padding:14px}
-
-/* voice bar */
-.vbar{
-  background:var(--sur);border:1px solid var(--line);
-  border-radius:var(--r);padding:12px;
-  display:flex;align-items:center;gap:11px;
-  transition:border-color .15s;
-}
+.vbar{background:var(--sur);border:1px solid var(--line);border-radius:var(--r);padding:12px;display:flex;align-items:center;gap:11px;transition:border-color .15s}
+.vbar.err{border-color:var(--red);background:rgba(229,9,20,.05)}
 .vbar:active{border-color:var(--y)}
-.vbar-ic{
-  width:38px;height:38px;border-radius:10px;
-  background:var(--sur3);display:flex;
-  align-items:center;justify-content:center;
-  font-size:18px;flex-shrink:0;
-}
+.vbar-ic{width:38px;height:38px;border-radius:10px;background:var(--sur3);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
 .vbar-inf{flex:1;min-width:0}
-.vbar-nm{
-  font-size:13px;font-weight:700;margin-bottom:2px;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-}
+.vbar-nm{font-size:13px;font-weight:700;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .vbar-nm em{color:var(--y);font-style:normal;font-weight:600}
+.vbar-nm.warn em{color:#ff8a8a}
 .vbar-meta{font-size:10.5px;color:var(--mu);font-family:var(--mono)}
 .vbar-ch{color:var(--mu);font-size:16px;flex-shrink:0}
-
-/* controls row */
-.ctrl-row{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
-  margin-top:12px;
-}
-.ctrl-cell{
-  background:var(--sur);border:1px solid var(--line);
-  border-radius:var(--r);padding:10px 11px;
-}
-.ctrl-cell label{
-  font-size:10px;color:var(--mu);
-  text-transform:uppercase;letter-spacing:.06em;
-  font-weight:700;display:block;margin-bottom:5px;
-}
-.ctrl-cell .val{
-  font-size:12.5px;font-weight:700;color:var(--y);
-  font-family:var(--mono);margin-bottom:6px;
-}
-input[type=range]{
-  width:100%;height:3px;-webkit-appearance:none;
-  background:#333;border-radius:2px;outline:none;
-}
-input[type=range]::-webkit-slider-thumb{
-  -webkit-appearance:none;width:14px;height:14px;
-  border-radius:50%;background:var(--y);cursor:pointer;
-  border:2px solid var(--bg);
-}
-input[type=range]::-moz-range-thumb{
-  width:14px;height:14px;border-radius:50%;
-  background:var(--y);cursor:pointer;border:2px solid var(--bg);
-}
-
-/* cue list */
-.cues-head{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:16px 0 10px;
-}
-.cues-title{
-  font-size:12px;font-weight:800;color:var(--mu);
-  text-transform:uppercase;letter-spacing:.07em;
-}
+.ctrl-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.ctrl-cell{background:var(--sur);border:1px solid var(--line);border-radius:var(--r);padding:10px 11px}
+.ctrl-cell label{font-size:10px;color:var(--mu);text-transform:uppercase;letter-spacing:.06em;font-weight:700;display:block;margin-bottom:5px}
+.ctrl-cell .val{font-size:12.5px;font-weight:700;color:var(--y);font-family:var(--mono);margin-bottom:6px}
+input[type=range]{width:100%;height:3px;-webkit-appearance:none;background:#333;border-radius:2px;outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--y);cursor:pointer;border:2px solid var(--bg)}
+.cues-head{display:flex;align-items:center;justify-content:space-between;padding:16px 0 10px}
+.cues-title{font-size:12px;font-weight:800;color:var(--mu);text-transform:uppercase;letter-spacing:.07em}
 .cues-tools{display:flex;gap:6px}
-.tbtn{
-  padding:6px 10px;border-radius:7px;
-  background:var(--sur2);border:1px solid var(--line);
-  font-size:11px;font-weight:700;
-  display:flex;align-items:center;gap:5px;
-  transition:.15s;
-}
+.tbtn{padding:6px 10px;border-radius:7px;background:var(--sur2);border:1px solid var(--line);font-size:11px;font-weight:700;display:flex;align-items:center;gap:5px;transition:.15s}
 .tbtn:active{background:var(--sur3)}
 .tbtn.y{background:var(--y-s);border-color:var(--y-d);color:var(--y)}
 .tbtn.r{background:rgba(229,9,20,.1);border-color:rgba(229,9,20,.35);color:#ff8a8a}
-
-/* cue */
-.cue{
-  background:var(--sur);border:1px solid var(--line);
-  border-radius:var(--r);padding:11px;
-  margin-bottom:8px;
-  transition:border-color .15s;
-  position:relative;
-}
+.tbtn.g{background:rgba(74,222,128,.1);border-color:rgba(74,222,128,.35);color:var(--grn)}
+.cue{background:var(--sur);border:1px solid var(--line);border-radius:var(--r);padding:11px;margin-bottom:8px;transition:border-color .15s;position:relative}
 .cue.playing{border-color:var(--y);background:var(--y-s)}
-.cue-head{
-  display:flex;align-items:center;gap:7px;
-  margin-bottom:8px;flex-wrap:wrap;
-}
-.cue-num{
-  font-family:var(--mono);font-size:10px;
-  color:var(--mu);font-weight:700;
-  background:var(--sur3);padding:2px 6px;
-  border-radius:4px;min-width:28px;text-align:center;
-}
-.cue-voice{
-  background:var(--sur3);border:1px solid var(--line);
-  border-radius:6px;padding:4px 8px;
-  font-size:10.5px;font-weight:700;
-  max-width:130px;flex-shrink:0;
-}
-.cue-time{
-  font-family:var(--mono);font-size:10px;
-  color:var(--mu);flex:1;
-}
-.cue-btn{
-  width:28px;height:28px;border-radius:7px;
-  background:var(--sur3);border:1px solid var(--line);
-  display:flex;align-items:center;justify-content:center;
-  font-size:11px;flex-shrink:0;
-  transition:.15s;
-}
+.cue-head{display:flex;align-items:center;gap:7px;margin-bottom:8px;flex-wrap:wrap}
+.cue-num{font-family:var(--mono);font-size:10px;color:var(--mu);font-weight:700;background:var(--sur3);padding:2px 6px;border-radius:4px;min-width:28px;text-align:center}
+.cue-voice{background:var(--sur3);border:1px solid var(--line);border-radius:6px;padding:4px 8px;font-size:10.5px;font-weight:700;max-width:140px;flex-shrink:0}
+.cue-time{font-family:var(--mono);font-size:10px;color:var(--mu);flex:1}
+.cue-btn{width:28px;height:28px;border-radius:7px;background:var(--sur3);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;transition:.15s}
 .cue-btn:active{background:#333}
 .cue-btn.play{background:var(--y);color:#000;border-color:var(--y)}
 .cue-btn.del{color:#ff6b73}
-.cue-text{
-  width:100%;background:var(--sur2);
-  border:1px solid transparent;border-radius:7px;
-  padding:9px 10px;font-size:12.5px;line-height:1.6;
-  resize:vertical;min-height:52px;outline:none;
-  font-family:inherit;
-}
+.cue-text{width:100%;background:var(--sur2);border:1px solid transparent;border-radius:7px;padding:9px 10px;font-size:12.5px;line-height:1.6;resize:vertical;min-height:52px;outline:none;font-family:inherit}
 .cue-text:focus{border-color:var(--y);background:var(--sur3)}
-.cue-foot{
-  display:flex;gap:6px;margin-top:7px;align-items:center;
-}
-.cue-dur{
-  font-family:var(--mono);font-size:10px;
-  color:var(--mu);flex:1;
-}
-
-/* add bar */
-.addbar{
-  background:var(--sur);border:1px dashed #333;
-  border-radius:var(--r);padding:12px;
-  margin-top:12px;
-}
+.cue-foot{display:flex;gap:6px;margin-top:7px;align-items:center}
+.cue-dur{font-family:var(--mono);font-size:10px;color:var(--mu);flex:1}
+.addbar{background:var(--sur);border:1px dashed #333;border-radius:var(--r);padding:12px;margin-top:12px}
 .addbar-row{display:flex;gap:8px;margin-bottom:8px}
-.addbar select{
-  flex:1;background:var(--sur2);
-  border:1px solid var(--line);border-radius:7px;
-  padding:9px 10px;font-size:12px;
-  font-weight:600;outline:none;
-}
-.addbar-text{
-  width:100%;background:var(--sur2);
-  border:1px solid var(--line);border-radius:7px;
-  padding:10px;font-size:12.5px;
-  min-height:56px;resize:vertical;outline:none;
-  font-family:inherit;line-height:1.55;
-}
+.addbar select{flex:1;background:var(--sur2);border:1px solid var(--line);border-radius:7px;padding:9px 10px;font-size:12px;font-weight:600;outline:none}
+.addbar-text{width:100%;background:var(--sur2);border:1px solid var(--line);border-radius:7px;padding:10px;font-size:12.5px;min-height:56px;resize:vertical;outline:none;font-family:inherit;line-height:1.55}
 .addbar-text:focus{border-color:var(--y)}
-.addbar-btn{
-  width:100%;background:var(--y);color:#000;
-  border-radius:8px;padding:11px;
-  font-size:13px;font-weight:800;margin-top:8px;
-  transition:transform .1s;
-}
+.addbar-btn{width:100%;background:var(--y);color:#000;border-radius:8px;padding:11px;font-size:13px;font-weight:800;margin-top:8px;transition:transform .1s}
 .addbar-btn:active{transform:scale(.98)}
-
-/* ═══ BOTTOM BAR ═══ */
-.bot{
-  position:fixed;bottom:0;left:0;right:0;z-index:90;
-  background:rgba(10,10,10,.96);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  border-top:1px solid var(--line);
-  padding:11px 14px calc(11px + env(safe-area-inset-bottom));
-  display:flex;gap:8px;align-items:center;
-}
-.bot-info{
-  flex:1;min-width:0;
-}
-.bot-info-n{
-  font-size:11px;font-weight:700;
-  font-family:var(--mono);color:var(--y);
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-}
-.bot-info-s{
-  font-size:10px;color:var(--mu);
-  font-family:var(--mono);
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-}
-.bot-btn{
-  background:var(--y);color:#000;
-  border-radius:9px;padding:11px 14px;
-  font-size:12.5px;font-weight:800;
-  display:flex;align-items:center;gap:6px;
-  white-space:nowrap;flex-shrink:0;
-  transition:transform .1s;
-}
+.bot{position:fixed;bottom:0;left:0;right:0;z-index:90;background:rgba(10,10,10,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:11px 14px calc(11px + env(safe-area-inset-bottom));display:flex;gap:8px;align-items:center}
+.bot-info{flex:1;min-width:0}
+.bot-info-n{font-size:11px;font-weight:700;font-family:var(--mono);color:var(--y);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bot-info-s{font-size:10px;color:var(--mu);font-family:var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bot-btn{background:var(--y);color:#000;border-radius:9px;padding:11px 14px;font-size:12.5px;font-weight:800;display:flex;align-items:center;gap:6px;white-space:nowrap;flex-shrink:0;transition:transform .1s}
 .bot-btn:active{transform:scale(.96)}
-.bot-btn.sec{
-  background:var(--sur2);color:var(--tx);
-  border:1px solid var(--line);
-}
-
-/* ═══ SHEET ═══ */
-.ovl{
-  position:fixed;inset:0;z-index:200;
-  background:rgba(0,0,0,.78);
-  display:none;align-items:flex-end;
-  backdrop-filter:blur(4px);
-}
+.bot-btn.sec{background:var(--sur2);color:var(--tx);border:1px solid var(--line)}
+.ovl{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.78);display:none;align-items:flex-end;backdrop-filter:blur(4px)}
 .ovl.on{display:flex;animation:fade .15s}
 @keyframes fade{from{opacity:0}to{opacity:1}}
-.sh{
-  background:var(--sur);border-radius:20px 20px 0 0;
-  width:100%;max-height:85vh;overflow-y:auto;
-  padding:18px 14px 32px;
-  animation:up .2s ease;
-}
+.sh{background:var(--sur);border-radius:20px 20px 0 0;width:100%;max-height:85vh;overflow-y:auto;padding:18px 14px 32px;animation:up .2s ease}
 @keyframes up{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
-.sh-h{
-  display:flex;justify-content:space-between;
-  align-items:center;margin-bottom:4px;
-}
+.sh-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
 .sh-t{font-size:15px;font-weight:800}
-.sh-t em{
-  color:var(--y);font-style:normal;
-  font-family:var(--mono);font-size:12px;
-}
-.sh-c{
-  width:30px;height:30px;border-radius:50%;
-  background:var(--sur3);color:var(--tx2);
-  display:flex;align-items:center;justify-content:center;
-  font-size:14px;flex-shrink:0;
-}
-.sh-s{font-size:11.5px;color:var(--mu);margin-bottom:14px}
-
+.sh-t em{color:var(--y);font-style:normal;font-family:var(--mono);font-size:12px}
+.sh-c{width:30px;height:30px;border-radius:50%;background:var(--sur3);color:var(--tx2);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.sh-s{font-size:11.5px;color:var(--mu);margin-bottom:14px;line-height:1.6}
 .vlist{max-height:56vh;overflow-y:auto}
-.vitem{
-  display:flex;align-items:center;gap:11px;
-  padding:10px 11px;border-radius:9px;
-  cursor:pointer;border:1.5px solid transparent;
-  margin-bottom:5px;transition:.12s;
-}
+.vitem{display:flex;align-items:center;gap:11px;padding:10px 11px;border-radius:9px;cursor:pointer;border:1.5px solid transparent;margin-bottom:5px;transition:.12s}
 .vitem:active{background:var(--sur2)}
 .vitem.sel{border-color:var(--y);background:var(--y-s)}
-.vitem-ic{
-  width:36px;height:36px;border-radius:9px;
-  background:var(--sur3);display:flex;
-  align-items:center;justify-content:center;
-  font-size:16px;flex-shrink:0;
-}
+.vitem-ic{width:36px;height:36px;border-radius:9px;background:var(--sur3);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
 .vitem-inf{flex:1;min-width:0}
-.vitem-n{
-  font-size:12.5px;font-weight:700;
-  margin-bottom:2px;overflow:hidden;
-  text-overflow:ellipsis;white-space:nowrap;
-}
-.vitem-l{
-  font-size:10px;color:var(--mu);
-  font-family:var(--mono);
-}
-.vitem-p{
-  width:30px;height:30px;border-radius:50%;
-  background:var(--sur3);display:flex;
-  align-items:center;justify-content:center;
-  font-size:10px;flex-shrink:0;
-}
-.vitem-p:active{background:#333}
-
-.search{
-  width:100%;background:var(--sur2);
-  border:1px solid var(--line);border-radius:9px;
-  padding:9px 12px;font-size:12.5px;
-  outline:none;margin-bottom:11px;
-}
+.vitem-n{font-size:12.5px;font-weight:700;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vitem-l{font-size:10px;color:var(--mu);font-family:var(--mono)}
+.vitem-p{width:30px;height:30px;border-radius:50%;background:var(--sur3);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0}
+.search{width:100%;background:var(--sur2);border:1px solid var(--line);border-radius:9px;padding:9px 12px;font-size:12.5px;outline:none;margin-bottom:11px}
 .search:focus{border-color:var(--y)}
-
-/* srt panel */
-.srt-out{
-  width:100%;background:#000;
-  border:1px solid var(--line);border-radius:8px;
-  padding:12px;font-family:var(--mono);
-  font-size:11px;line-height:1.6;
-  color:#b0f0c4;min-height:200px;
-  resize:vertical;outline:none;
-  white-space:pre;overflow:auto;
-}
-
-/* toast */
-.toast{
-  position:fixed;bottom:110px;left:50%;
-  transform:translateX(-50%) translateY(8px);
-  background:#1e1e1e;border:1px solid #333;
-  color:var(--tx);padding:10px 16px;
-  border-radius:9px;font-size:12px;font-weight:600;
-  z-index:300;opacity:0;pointer-events:none;
-  transition:opacity .2s,transform .2s;
-  max-width:80vw;text-align:center;
-}
-.toast.on{
-  opacity:1;transform:translateX(-50%) translateY(0);
-}
+.srt-out{width:100%;background:#000;border:1px solid var(--line);border-radius:8px;padding:12px;font-family:var(--mono);font-size:11px;line-height:1.6;color:#b0f0c4;min-height:200px;resize:vertical;outline:none;white-space:pre;overflow:auto}
+.toast{position:fixed;bottom:110px;left:50%;transform:translateX(-50%) translateY(8px);background:#1e1e1e;border:1px solid #333;color:var(--tx);padding:10px 16px;border-radius:9px;font-size:12px;font-weight:600;z-index:300;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;max-width:80vw;text-align:center;line-height:1.5}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 .toast.err{border-color:var(--red);color:#ff8a8a}
 .toast.ok{border-color:var(--grn);color:#b0f0c4}
-
-.empty{
-  text-align:center;padding:40px 20px;
-  color:var(--mu);font-size:12.5px;line-height:1.8;
-}
+.empty{text-align:center;padding:40px 20px;color:var(--mu);font-size:12.5px;line-height:1.8}
 .empty-ic{font-size:36px;margin-bottom:12px;opacity:.4}
+.help{background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.3);border-radius:10px;padding:11px 12px;font-size:11.5px;line-height:1.7;color:#a8c5e8;margin-top:10px}
+.help b{color:#60a5fa}
+.help ol{margin:6px 0 0 16px;padding:0}
+.help li{margin-bottom:3px}
+.help code{background:rgba(0,0,0,.4);padding:1px 5px;border-radius:4px;font-family:var(--mono);font-size:10.5px}
 </style>
 </head>
 <body>
@@ -389,50 +118,34 @@ input[type=range]::-moz-range-thumb{
 </nav>
 
 <div class="tabs">
-  <button class="tab on" data-tab="script">
-    🎬 Script <span class="cnt" id="cntScript">0</span>
-  </button>
-  <button class="tab" data-tab="srt">
-    📄 SRT <span class="cnt" id="cntSrt">0</span>
-  </button>
-  <button class="tab" data-tab="project">
-    💾 Project
-  </button>
+  <button class="tab on" data-tab="script">🎬 Script <span class="cnt" id="cntScript">0</span></button>
+  <button class="tab" data-tab="srt">📄 SRT <span class="cnt" id="cntSrt">0</span></button>
+  <button class="tab" data-tab="project">💾 Project</button>
 </div>
 
-<!-- ═══ SCRIPT TAB ═══ -->
 <div class="sec" id="panelScript">
 
   <div class="vbar" id="vbar">
     <div class="vbar-ic" id="vbIc">🎙️</div>
     <div class="vbar-inf">
-      <div class="vbar-nm" id="vbNm">Default Voice <em>(system)</em></div>
-      <div class="vbar-meta" id="vbMeta">— voices loaded</div>
+      <div class="vbar-nm" id="vbNm">Voices loading…</div>
+      <div class="vbar-meta" id="vbMeta">tap to retry</div>
     </div>
     <span class="vbar-ch">›</span>
   </div>
 
+  <div id="warnBox"></div>
+
   <div class="ctrl-row">
-    <div class="ctrl-cell">
-      <label>Speed</label>
-      <div class="val" id="vSpeed">1.00x</div>
-      <input type="range" id="rSpeed" min="50" max="250" value="100">
-    </div>
-    <div class="ctrl-cell">
-      <label>Pitch</label>
-      <div class="val" id="vPitch">1.00</div>
-      <input type="range" id="rPitch" min="50" max="200" value="100">
-    </div>
-    <div class="ctrl-cell">
-      <label>Volume</label>
-      <div class="val" id="vVol">100%</div>
-      <input type="range" id="rVol" min="0" max="100" value="100">
-    </div>
+    <div class="ctrl-cell"><label>Speed</label><div class="val" id="vSpeed">1.00x</div><input type="range" id="rSpeed" min="50" max="250" value="100"></div>
+    <div class="ctrl-cell"><label>Pitch</label><div class="val" id="vPitch">1.00</div><input type="range" id="rPitch" min="50" max="200" value="100"></div>
+    <div class="ctrl-cell"><label>Volume</label><div class="val" id="vVol">100%</div><input type="range" id="rVol" min="0" max="100" value="100"></div>
   </div>
 
   <div class="cues-head">
     <div class="cues-title">Cues · <span id="cueCount">0</span></div>
     <div class="cues-tools">
+      <button class="tbtn g" id="btnTest">🔊 Test</button>
       <button class="tbtn y" id="btnImport">📥 Paste</button>
       <button class="tbtn r" id="btnClear">🗑</button>
     </div>
@@ -444,13 +157,11 @@ input[type=range]::-moz-range-thumb{
     <div class="addbar-row">
       <select id="addVoice"></select>
     </div>
-    <textarea class="addbar-text" id="addText"
-      placeholder="Cue အသစ်... (Cmd/Ctrl + Enter နဲ့ ထည့်)"></textarea>
+    <textarea class="addbar-text" id="addText" placeholder="Cue အသစ်..."></textarea>
     <button class="addbar-btn" id="btnAdd">+ Add Cue</button>
   </div>
 </div>
 
-<!-- ═══ SRT TAB ═══ -->
 <div class="sec" id="panelSrt" style="display:none">
   <div class="cues-head">
     <div class="cues-title">SRT Output</div>
@@ -460,18 +171,11 @@ input[type=range]::-moz-range-thumb{
     </div>
   </div>
   <textarea class="srt-out" id="srtOut" placeholder="Build ကို နှိပ်ပြီး SRT ထုတ်ပါ..."></textarea>
-
-  <div class="cues-head">
-    <div class="cues-title">Import SRT → Cues</div>
-  </div>
-  <textarea class="srt-out" id="srtIn" style="color:#e8e8e8"
-    placeholder="SRT ဖိုင်ကို ဒီမှာ paste ပြီး Import နှိပ်"></textarea>
-  <button class="addbar-btn" id="btnParseSrt" style="margin-top:10px">
-    📥 Import SRT → Script
-  </button>
+  <div class="cues-head"><div class="cues-title">Import SRT → Cues</div></div>
+  <textarea class="srt-out" id="srtIn" style="color:#e8e8e8" placeholder="SRT paste လုပ်ပြီး Import နှိပ်"></textarea>
+  <button class="addbar-btn" id="btnParseSrt" style="margin-top:10px">📥 Import SRT</button>
 </div>
 
-<!-- ═══ PROJECT TAB ═══ -->
 <div class="sec" id="panelProject" style="display:none">
   <div class="cues-head">
     <div class="cues-title">Project File</div>
@@ -481,39 +185,31 @@ input[type=range]::-moz-range-thumb{
       <input type="file" id="fileJson" accept=".json" style="display:none">
     </div>
   </div>
-  <div style="font-size:12px;color:var(--mu);line-height:1.8;padding:12px;
-              background:var(--sur);border:1px solid var(--line);border-radius:10px">
-    Project JSON ကို export ပြီး import ပြန်လုပ်နိုင်တယ်.<br>
+  <div class="help">
+    Project JSON ကို export/import ပြုလုပ်နိုင်တယ်.<br>
     Cues, voices, speed/pitch/volume အကုန်ပါတယ်.<br>
     localStorage မှာ auto-save ဖြစ်နေတယ်.
   </div>
-  <div class="cues-head" style="padding-top:20px">
-    <div class="cues-title">Auto-save</div>
-  </div>
-  <div style="font-size:12px;color:var(--mu);padding:12px;
-              background:var(--sur);border:1px solid var(--line);border-radius:10px">
-    နောက်ဆုံး save: <span id="lastSave" style="color:var(--y);font-family:var(--mono)">—</span>
-  </div>
+  <div class="cues-head" style="padding-top:20px"><div class="cues-title">Auto-save</div></div>
+  <div class="help">နောက်ဆုံး save: <span id="lastSave" style="color:var(--y);font-family:var(--mono)">—</span></div>
 </div>
 
-<!-- ═══ BOTTOM ═══ -->
 <div class="bot">
   <div class="bot-info">
-    <div class="bot-info-n" id="botInfo">0 cues · 0s</div>
+    <div class="bot-info-n" id="botInfo">0 cues</div>
     <div class="bot-info-s" id="botVoiceName">—</div>
   </div>
   <button class="bot-btn sec" id="btnPlayAll">▶ Play All</button>
   <button class="bot-btn" id="btnStop">⏹ Stop</button>
 </div>
 
-<!-- ═══ VOICE SHEET ═══ -->
 <div class="ovl" id="ovl">
   <div class="sh">
     <div class="sh-h">
       <div class="sh-t">Voice · <em id="vTotal">0</em></div>
       <button class="sh-c" id="shClose">✕</button>
     </div>
-    <div class="sh-s">Browser system voices · Web Speech API</div>
+    <div class="sh-s">Browser system voices. မြန်မာ voice မရှိရင် အောက်မှာ ဖတ်ပါ.</div>
     <input class="search" id="vSearch" placeholder="🔍 ရှာရန်...">
     <div class="vlist" id="vList"></div>
   </div>
@@ -524,9 +220,6 @@ input[type=range]::-moz-range-thumb{
 <script>
 'use strict';
 
-/* ═══════════════════════════════════════════════
-   STATE
-   ═══════════════════════════════════════════════ */
 const $ = id => document.getElementById(id);
 const synth = window.speechSynthesis;
 
@@ -537,28 +230,22 @@ const S = {
   curPlaying: -1,
   playing: false,
   cfg: { rate: 1.0, pitch: 1.0, vol: 1.0 },
+  voicesReady: false,
 };
 
-/* ═══════════════════════════════════════════════
-   UTIL
-   ═══════════════════════════════════════════════ */
 function toast(msg, kind){
   const t = $('toast');
-  t.textContent = msg;
+  t.innerHTML = msg;
   t.className = 'toast on ' + (kind || '');
   clearTimeout(toast._t);
-  toast._t = setTimeout(() => t.classList.remove('on'), 2400);
+  toast._t = setTimeout(() => t.classList.remove('on'), 3600);
 }
 
 function esc(s){
-  return String(s).replace(/[&<>"']/g, c => ({
-    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-  }[c]));
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
-function uid(){
-  return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
-}
+function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
 
 function fmtMs(ms){
   const h = Math.floor(ms/3600000);
@@ -568,13 +255,12 @@ function fmtMs(ms){
   return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')},${String(x).padStart(3,'0')}`;
 }
 
-/* ═══════════════════════════════════════════════
-   VOICES
-   ═══════════════════════════════════════════════ */
+/* ═══ VOICE BOOT — the fix ═══ */
 function loadVoices(){
-  if (!synth) return;
+  if (!synth) return false;
   const v = synth.getVoices();
-  if (!v.length) return;
+  if (!v || !v.length) return false;
+
   S.voices = v.map((voice, i) => ({
     id: 'v' + i,
     name: voice.name,
@@ -582,40 +268,86 @@ function loadVoices(){
     local: voice.localService,
     ref: voice,
   }));
+
   if (!S.selVoice || !S.voices.find(x => x.id === S.selVoice.id)){
     const my = S.voices.find(x => x.lang.toLowerCase().startsWith('my'));
     const en = S.voices.find(x => x.lang === 'en-US');
     S.selVoice = my || en || S.voices[0];
   }
+
+  S.voicesReady = true;
   renderVoiceBar();
   renderVoiceList();
   renderVoiceSelect();
+  checkMyanmar();
+  return true;
 }
 
-if (synth){
-  loadVoices();
-  synth.onvoiceschanged = loadVoices;
-  setTimeout(loadVoices, 250);
-  setTimeout(loadVoices, 1000);
+function bootVoices(){
+  if (!synth){
+    $('vbNm').innerHTML = '<em>Speech API မရနိုင်ပါ</em>';
+    $('vbMeta').textContent = 'browser မထောက်ပံ့ပါ';
+    return;
+  }
+
+  // attempt 1: immediate
+  if (loadVoices()) return;
+
+  // attempt 2: Chrome unlock trick — speak empty
+  try {
+    const u = new SpeechSynthesisUtterance(' ');
+    u.volume = 0;
+    u.rate = 10;
+    synth.speak(u);
+  } catch(e){}
+
+  // attempt 3: poll
+  let tries = 0;
+  const iv = setInterval(() => {
+    tries++;
+    if (loadVoices()){ clearInterval(iv); return; }
+    if (tries > 30){ clearInterval(iv); }
+  }, 400);
+
+  // attempt 4: onvoiceschanged
+  synth.onvoiceschanged = () => {
+    if (loadVoices()) clearInterval(iv);
+  };
+}
+
+function checkMyanmar(){
+  const has = S.voices.some(v => v.lang.toLowerCase().startsWith('my'));
+  if (has){
+    $('warnBox').innerHTML = '';
+    return;
+  }
+  $('warnBox').innerHTML = `<div class="help" style="border-color:rgba(245,197,24,.4);background:rgba(245,197,24,.06);color:#e8d090">
+    <b style="color:#f5c518">⚠ မြန်မာ voice မရှိပါ</b><br>
+    Android: <b>Settings → System → Languages & input → Text-to-speech output → Google TTS → Install voice data → မြန်မာ</b><br><br>
+    မရှိသေးရင် English voice နဲ့ဖတ်မယ် — မြန်မာစာလုံးတွေ လျှောက်ကျော်နိုင်တယ်.<br>
+    <b>Test</b> ကိုနှိပ်ပြီး စမ်းပါ.
+  </div>`;
 }
 
 function renderVoiceBar(){
   const v = S.selVoice;
-  if (!v) return;
+  if (!v){
+    $('vbNm').textContent = 'No voices found';
+    $('vbMeta').textContent = 'tap to retry';
+    return;
+  }
   const ic = v.lang.toLowerCase().startsWith('my') ? '🎙️'
     : v.lang.toLowerCase().startsWith('en') ? '🇬🇧' : '🌐';
   $('vbIc').textContent = ic;
   const nm = v.name.split(' ').slice(0, 2).join(' ');
   $('vbNm').innerHTML = `${esc(nm)} <em>(${esc(v.lang)})</em>`;
   $('vbMeta').textContent = `${S.voices.length} voices · ${v.local ? 'local' : 'cloud'}`;
-  $('botVoiceName').textContent = nm;
+  $('botVoiceName').textContent = nm + ' · ' + v.lang;
 }
 
 function renderVoiceList(){
   const q = ($('vSearch').value || '').toLowerCase();
-  const list = S.voices.filter(v =>
-    !q || v.name.toLowerCase().includes(q) || v.lang.toLowerCase().includes(q)
-  );
+  const list = S.voices.filter(v => !q || v.name.toLowerCase().includes(q) || v.lang.toLowerCase().includes(q));
   $('vTotal').textContent = list.length;
   if (!list.length){
     $('vList').innerHTML = '<div class="empty">Voice မတွေ့ပါ</div>';
@@ -638,12 +370,9 @@ function renderVoiceList(){
   $('vList').querySelectorAll('.vitem').forEach(el => {
     el.addEventListener('click', e => {
       if (e.target.closest('.vitem-p')) return;
-      const v = S.voices.find(x => x.id === el.dataset.id);
-      S.selVoice = v;
-      renderVoiceBar();
-      renderVoiceList();
-      renderVoiceSelect();
-      toast('Voice: ' + v.name.split(' ')[0], 'ok');
+      S.selVoice = S.voices.find(x => x.id === el.dataset.id);
+      renderVoiceBar(); renderVoiceList(); renderVoiceSelect();
+      toast('Voice: ' + S.selVoice.name.split(' ')[0], 'ok');
     });
   });
   $('vList').querySelectorAll('.vitem-p').forEach(btn => {
@@ -651,11 +380,15 @@ function renderVoiceList(){
       e.stopPropagation();
       const v = S.voices.find(x => x.id === btn.dataset.prev);
       if (!v) return;
-      synth.cancel();
-      const u = new SpeechSynthesisUtterance('စမ်းသပ် — preview');
-      u.voice = v.ref;
-      u.rate = S.cfg.rate;
-      synth.speak(u);
+      try {
+        synth.cancel();
+        const u = new SpeechSynthesisUtterance('Hello — test');
+        u.voice = v.ref;
+        u.rate = S.cfg.rate;
+        u.volume = S.cfg.vol;
+        u.onerror = (ev) => toast('Voice error: ' + (ev.error || '?'), 'err');
+        synth.speak(u);
+      } catch(err){ toast('speak error: ' + err.message, 'err'); }
     });
   });
 }
@@ -665,32 +398,53 @@ function renderVoiceSelect(){
   if (!sel) return;
   const cur = S.selVoice ? S.selVoice.id : '';
   sel.innerHTML = S.voices.map(v => {
-    const label = v.name.split(' ').slice(0, 2).join(' ') + ' · ' + v.lang.split('-')[0];
+    const label = v.name.split(' ').slice(0,2).join(' ') + ' · ' + v.lang.split('-')[0];
     return `<option value="${v.id}"${v.id === cur ? ' selected' : ''}>${esc(label)}</option>`;
-  }).join('');
+  }).join('') || '<option value="">no voices</option>';
 }
 
-$('vSearch').addEventListener('input', renderVoiceList);
+/* ═══ TEST SOUND ═══ */
+$('btnTest').addEventListener('click', () => {
+  if (!synth) return toast('Speech API မရနိုင်ပါ', 'err');
 
-/* ═══════════════════════════════════════════════
-   CUES
-   ═══════════════════════════════════════════════ */
+  if (!S.voicesReady){
+    bootVoices();
+    toast('Voices ရှာနေတယ် — ခဏနေပြီး ပြန်နှိပ်', 'err');
+    return;
+  }
+
+  const v = S.selVoice;
+  const text = v && v.lang.toLowerCase().startsWith('my')
+    ? 'စမ်းသပ်အသံ — တစ်၊ နှစ်၊ သုံး'
+    : 'Test sound — one, two, three';
+
+  try {
+    synth.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    if (v) u.voice = v.ref;
+    u.rate = S.cfg.rate;
+    u.pitch = S.cfg.pitch;
+    u.volume = S.cfg.vol;
+    u.onstart = () => toast('▶ ဖတ်နေသည်...', 'ok');
+    u.onend = () => toast('✓ ပြီးပါပြီ', 'ok');
+    u.onerror = (ev) => toast('Error: ' + (ev.error || 'unknown'), 'err');
+    synth.speak(u);
+  } catch(err){
+    toast('speak မရ: ' + err.message, 'err');
+  }
+});
+
+/* ═══ CUES ═══ */
 function addCue(text, voiceId){
   text = (text || '').trim();
   if (!text) return null;
-  const cue = {
-    id: uid(),
-    text,
-    voiceId: voiceId || (S.selVoice ? S.selVoice.id : null),
-    durMs: estimateDur(text),
-  };
+  const cue = { id: uid(), text, voiceId: voiceId || (S.selVoice ? S.selVoice.id : null), durMs: estimateDur(text) };
   S.cues.push(cue);
   return cue;
 }
 
 function estimateDur(text){
-  const cfg = S.cfg;
-  const cps = 14 * cfg.rate; // ~14 chars/sec at 1.0x
+  const cps = 14 * S.cfg.rate;
   return Math.max(1200, Math.round((text.length / cps) * 1000));
 }
 
@@ -706,52 +460,34 @@ function renderCues(){
     return;
   }
   box.innerHTML = S.cues.map((c, i) => {
-    const v = S.voices.find(x => x.id === c.voiceId) || S.selVoice;
-    const vname = v ? v.name.split(' ')[0] : 'default';
     const vopts = S.voices.map(x => {
-      const lbl = x.name.split(' ').slice(0, 2).join(' ');
+      const lbl = x.name.split(' ').slice(0,2).join(' ');
       return `<option value="${x.id}"${x.id === c.voiceId ? ' selected' : ''}>${esc(lbl)}</option>`;
     }).join('');
     return `<div class="cue${S.curPlaying === i ? ' playing' : ''}" data-idx="${i}">
       <div class="cue-head">
         <span class="cue-num">#${String(i+1).padStart(2,'0')}</span>
         <select class="cue-voice" data-idx="${i}">${vopts}</select>
-        <span class="cue-time">${fmtMs(c.durMs).slice(3, 12)}</span>
+        <span class="cue-time">${fmtMs(c.durMs).slice(3,12)}</span>
         <button class="cue-btn play" data-play="${i}">▶</button>
         <button class="cue-btn del" data-del="${i}">✕</button>
       </div>
       <textarea class="cue-text" data-edit="${i}" rows="2">${esc(c.text)}</textarea>
-      <div class="cue-foot">
-        <span class="cue-dur">dur: ${c.durMs}ms</span>
-      </div>
+      <div class="cue-foot"><span class="cue-dur">dur: ${c.durMs}ms</span></div>
     </div>`;
   }).join('');
 
-  // wire events
-  box.querySelectorAll('.cue-btn.play').forEach(b => {
-    b.addEventListener('click', () => playCue(+b.dataset.play));
-  });
-  box.querySelectorAll('.cue-btn.del').forEach(b => {
-    b.addEventListener('click', () => {
-      S.cues.splice(+b.dataset.del, 1);
-      renderCues(); save();
-    });
-  });
-  box.querySelectorAll('.cue-text').forEach(t => {
-    t.addEventListener('input', () => {
-      const i = +t.dataset.edit;
-      S.cues[i].text = t.value;
-      S.cues[i].durMs = estimateDur(t.value);
-      updateCnts(); save();
-    });
-  });
-  box.querySelectorAll('.cue-voice').forEach(s => {
-    s.addEventListener('change', () => {
-      const i = +s.dataset.idx;
-      S.cues[i].voiceId = s.value;
-      save();
-    });
-  });
+  box.querySelectorAll('.cue-btn.play').forEach(b => b.addEventListener('click', () => playCue(+b.dataset.play)));
+  box.querySelectorAll('.cue-btn.del').forEach(b => b.addEventListener('click', () => { S.cues.splice(+b.dataset.del, 1); renderCues(); save(); }));
+  box.querySelectorAll('.cue-text').forEach(t => t.addEventListener('input', () => {
+    const i = +t.dataset.edit;
+    S.cues[i].text = t.value;
+    S.cues[i].durMs = estimateDur(t.value);
+    updateCnts(); save();
+  }));
+  box.querySelectorAll('.cue-voice').forEach(s => s.addEventListener('change', () => {
+    S.cues[+s.dataset.idx].voiceId = s.value; save();
+  }));
   updateCnts();
 }
 
@@ -763,14 +499,15 @@ function updateCnts(){
   $('botInfo').textContent = `${S.cues.length} cues · ${(totalMs/1000).toFixed(1)}s`;
 }
 
-/* ═══════════════════════════════════════════════
-   PLAYBACK
-   ═══════════════════════════════════════════════ */
+/* ═══ PLAYBACK ═══ */
 function playCue(i){
-  if (!synth) return toast('Browser TTS မရနိုင်ပါ', 'err');
+  if (!synth) return toast('Speech API မရနိုင်ပါ', 'err');
+  if (!S.voicesReady){ bootVoices(); return toast('Voices loading — ခဏနေ', 'err'); }
+
   const cue = S.cues[i];
   if (!cue) return;
-  synth.cancel();
+
+  try { synth.cancel(); } catch(e){}
   S.curPlaying = i;
   renderCues();
 
@@ -784,39 +521,34 @@ function playCue(i){
   u.onend = () => {
     S.curPlaying = -1;
     renderCues();
-    if (S.playing && i + 1 < S.cues.length){
-      setTimeout(() => playCue(i + 1), 80);
-    } else {
-      S.playing = false;
-    }
+    if (S.playing && i + 1 < S.cues.length) setTimeout(() => playCue(i + 1), 80);
+    else S.playing = false;
   };
-  u.onerror = () => {
-    S.curPlaying = -1;
-    S.playing = false;
-    renderCues();
+  u.onerror = (ev) => {
+    S.curPlaying = -1; S.playing = false; renderCues();
+    toast('Playback error: ' + (ev.error || '?'), 'err');
   };
   synth.speak(u);
 }
 
 function playAll(){
-  if (!synth) return toast('Browser TTS မရနိုင်ပါ', 'err');
+  if (!synth) return toast('Speech API မရနိုင်ပါ', 'err');
+  if (!S.voicesReady){ bootVoices(); return toast('Voices loading — ခဏနေ', 'err'); }
   if (!S.cues.length) return toast('Cue မရှိသေးဘူး', 'err');
-  synth.cancel();
+  try { synth.cancel(); } catch(e){}
   S.playing = true;
   playCue(0);
   toast('▶ Playing all cues', 'ok');
 }
 
 function stopAll(){
-  if (synth) synth.cancel();
+  if (synth) try { synth.cancel(); } catch(e){}
   S.playing = false;
   S.curPlaying = -1;
   renderCues();
 }
 
-/* ═══════════════════════════════════════════════
-   SRT
-   ═══════════════════════════════════════════════ */
+/* ═══ SRT ═══ */
 function buildSrt(){
   if (!S.cues.length) return '';
   let cursor = 0;
@@ -839,9 +571,7 @@ function wrapSrt(text, width){
   if (t.length <= width) return t;
   const words = t.split(/\s+/);
   const mid = Math.ceil(words.length / 2);
-  const l1 = words.slice(0, mid).join(' ');
-  const l2 = words.slice(mid).join(' ');
-  return l1 + '\n' + l2;
+  return words.slice(0, mid).join(' ') + '\n' + words.slice(mid).join(' ');
 }
 
 function parseSrt(text){
@@ -863,23 +593,19 @@ function parseSrt(text){
   return out;
 }
 
-/* ═══════════════════════════════════════════════
-   PROJECT SAVE/LOAD
-   ═══════════════════════════════════════════════ */
-const LS_KEY = 'recap_studio_v1';
+/* ═══ SAVE ═══ */
+const LS_KEY = 'recap_studio_v2';
 
 function save(){
   try {
-    const data = {
+    localStorage.setItem(LS_KEY, JSON.stringify({
       cues: S.cues,
       selVoiceId: S.selVoice ? S.selVoice.id : null,
       cfg: S.cfg,
       ts: Date.now(),
-    };
-    localStorage.setItem(LS_KEY, JSON.stringify(data));
-    const t = new Date().toLocaleTimeString();
+    }));
     const el = $('lastSave');
-    if (el) el.textContent = t;
+    if (el) el.textContent = new Date().toLocaleTimeString();
   } catch(e){}
 }
 
@@ -889,14 +615,14 @@ function load(){
     if (!raw) return;
     const d = JSON.parse(raw);
     if (Array.isArray(d.cues)) S.cues = d.cues;
-    if (d.cfg) {
+    if (d.cfg){
       S.cfg = Object.assign({ rate:1, pitch:1, vol:1 }, d.cfg);
-      $('rSpeed').value = Math.round(S.cfg.rate * 100);
-      $('rPitch').value = Math.round(S.cfg.pitch * 100);
-      $('rVol').value = Math.round(S.cfg.vol * 100);
-      $('vSpeed').textContent = S.cfg.rate.toFixed(2) + 'x';
+      $('rSpeed').value = Math.round(S.cfg.rate*100);
+      $('rPitch').value = Math.round(S.cfg.pitch*100);
+      $('rVol').value = Math.round(S.cfg.vol*100);
+      $('vSpeed').textContent = S.cfg.rate.toFixed(2)+'x';
       $('vPitch').textContent = S.cfg.pitch.toFixed(2);
-      $('vVol').textContent = Math.round(S.cfg.vol*100) + '%';
+      $('vVol').textContent = Math.round(S.cfg.vol*100)+'%';
     }
     if (d.ts){
       const el = $('lastSave');
@@ -905,55 +631,38 @@ function load(){
   } catch(e){}
 }
 
-/* ═══════════════════════════════════════════════
-   EVENTS
-   ═══════════════════════════════════════════════ */
-// tabs
+/* ═══ EVENTS ═══ */
 document.querySelectorAll('.tab').forEach(t => {
   t.addEventListener('click', () => {
     document.querySelectorAll('.tab').forEach(x => x.classList.remove('on'));
     t.classList.add('on');
-    const name = t.dataset.tab;
-    $('panelScript').style.display = name === 'script' ? 'block' : 'none';
-    $('panelSrt').style.display = name === 'srt' ? 'block' : 'none';
-    $('panelProject').style.display = name === 'project' ? 'block' : 'none';
-    if (name === 'srt') $('srtOut').value = buildSrt();
+    const n = t.dataset.tab;
+    $('panelScript').style.display = n === 'script' ? 'block' : 'none';
+    $('panelSrt').style.display = n === 'srt' ? 'block' : 'none';
+    $('panelProject').style.display = n === 'project' ? 'block' : 'none';
+    if (n === 'srt') $('srtOut').value = buildSrt();
   });
 });
 
-// voice sheet
 $('vbar').addEventListener('click', () => {
-  if (!S.voices.length){ toast('Voices loading...', 'err'); return; }
+  if (!S.voicesReady){
+    bootVoices();
+    toast('Voices ရှာနေတယ် — ခဏနေ', 'err');
+    return;
+  }
   $('ovl').classList.add('on');
 });
 $('shClose').addEventListener('click', () => $('ovl').classList.remove('on'));
-$('ovl').addEventListener('click', e => {
-  if (e.target.id === 'ovl') $('ovl').classList.remove('on');
-});
+$('ovl').addEventListener('click', e => { if (e.target.id === 'ovl') $('ovl').classList.remove('on'); });
 
-// sliders
-$('rSpeed').addEventListener('input', e => {
-  S.cfg.rate = e.target.value / 100;
-  $('vSpeed').textContent = S.cfg.rate.toFixed(2) + 'x';
-  save();
-});
-$('rPitch').addEventListener('input', e => {
-  S.cfg.pitch = e.target.value / 100;
-  $('vPitch').textContent = S.cfg.pitch.toFixed(2);
-  save();
-});
-$('rVol').addEventListener('input', e => {
-  S.cfg.vol = e.target.value / 100;
-  $('vVol').textContent = e.target.value + '%';
-  save();
-});
+$('rSpeed').addEventListener('input', e => { S.cfg.rate = e.target.value/100; $('vSpeed').textContent = S.cfg.rate.toFixed(2)+'x'; save(); });
+$('rPitch').addEventListener('input', e => { S.cfg.pitch = e.target.value/100; $('vPitch').textContent = S.cfg.pitch.toFixed(2); save(); });
+$('rVol').addEventListener('input', e => { S.cfg.vol = e.target.value/100; $('vVol').textContent = e.target.value+'%'; save(); });
 
-// add cue
 $('btnAdd').addEventListener('click', () => {
   const t = $('addText').value.trim();
   if (!t) return toast('စာသား ရိုက်ထည့်ပါ', 'err');
   const vid = $('addVoice').value;
-  // multi-line → multi-cue
   const lines = t.split('\n').map(l => l.trim()).filter(Boolean);
   lines.forEach(l => addCue(l, vid));
   $('addText').value = '';
@@ -962,26 +671,16 @@ $('btnAdd').addEventListener('click', () => {
 });
 
 $('addText').addEventListener('keydown', e => {
-  if ((e.ctrlKey || e.metaKey) && e.key === 'Enter'){
-    e.preventDefault();
-    $('btnAdd').click();
-  }
+  if ((e.ctrlKey || e.metaKey) && e.key === 'Enter'){ e.preventDefault(); $('btnAdd').click(); }
 });
 
 $('addVoice').addEventListener('change', e => {
   const v = S.voices.find(x => x.id === e.target.value);
-  if (v){
-    S.selVoice = v;
-    renderVoiceBar();
-  }
+  if (v){ S.selVoice = v; renderVoiceBar(); }
 });
 
-// paste / import big script
 $('btnImport').addEventListener('click', () => {
-  const p = prompt(
-    'Script ကို paste လုပ်ပါ (တစ်ကြောင်း = တစ် cue):\n' +
-    '(voice prefix optional: v0:: စာသား)'
-  );
+  const p = prompt('Script paste (တစ်ကြောင်း = တစ် cue):');
   if (!p) return;
   const lines = p.split('\n').map(l => l.trim()).filter(Boolean);
   let count = 0;
@@ -989,10 +688,7 @@ $('btnImport').addEventListener('click', () => {
     let vid = $('addVoice').value;
     let text = line;
     const m = line.match(/^(v\d+)::\s*(.+)$/);
-    if (m){
-      const v = S.voices.find(x => x.id === m[1]);
-      if (v){ vid = m[1]; text = m[2]; }
-    }
+    if (m){ const v = S.voices.find(x => x.id === m[1]); if (v){ vid = m[1]; text = m[2]; } }
     if (text.trim()){ addCue(text, vid); count++; }
   });
   renderCues(); save();
@@ -1002,69 +698,40 @@ $('btnImport').addEventListener('click', () => {
 $('btnClear').addEventListener('click', () => {
   if (!S.cues.length) return;
   if (!confirm('Cue အားလုံး ဖျက်မလား?')) return;
-  S.cues = [];
-  renderCues(); save();
-  toast('Cleared', 'ok');
+  S.cues = []; renderCues(); save(); toast('Cleared', 'ok');
 });
 
-// SRT build
-$('btnBuildSrt').addEventListener('click', () => {
-  $('srtOut').value = buildSrt();
-  toast('SRT built ✓', 'ok');
-});
-
+$('btnBuildSrt').addEventListener('click', () => { $('srtOut').value = buildSrt(); toast('SRT built ✓', 'ok'); });
 $('btnDlSrt').addEventListener('click', () => {
   const srt = $('srtOut').value || buildSrt();
-  if (!srt){
-    $('srtOut').value = buildSrt();
-  }
   if (!srt) return toast('Cue မရှိဘူး', 'err');
   const blob = new Blob([srt], { type: 'text/plain' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
   a.download = 'recap-' + Date.now() + '.srt';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
   setTimeout(() => URL.revokeObjectURL(url), 500);
   toast('SRT downloaded ✓', 'ok');
 });
 
-// import srt
 $('btnParseSrt').addEventListener('click', () => {
   const raw = $('srtIn').value.trim();
   if (!raw) return toast('SRT paste လုပ်ပါ', 'err');
   const parsed = parseSrt(raw);
   if (!parsed.length) return toast('Cue မတွေ့ပါ', 'err');
-  parsed.forEach(p => {
-    const c = addCue(p.text, $('addVoice').value);
-    if (c) c.durMs = p.durMs;
-  });
+  parsed.forEach(p => { const c = addCue(p.text, $('addVoice').value); if (c) c.durMs = p.durMs; });
   renderCues(); save();
   toast(`+${parsed.length} cues from SRT`, 'ok');
 });
 
-// project export / import
 $('btnSaveJson').addEventListener('click', () => {
-  const data = {
-    version: 1,
-    cues: S.cues,
-    selVoice: S.selVoice ? {
-      name: S.selVoice.name, lang: S.selVoice.lang,
-    } : null,
-    cfg: S.cfg,
-    exported: new Date().toISOString(),
-  };
-  const blob = new Blob([JSON.stringify(data, null, 2)],
-    { type: 'application/json' });
+  const data = { version: 2, cues: S.cues, selVoice: S.selVoice ? { name: S.selVoice.name, lang: S.selVoice.lang } : null, cfg: S.cfg, exported: new Date().toISOString() };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url;
-  a.download = 'recap-project-' + Date.now() + '.json';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
+  a.href = url; a.download = 'recap-project-' + Date.now() + '.json';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
   setTimeout(() => URL.revokeObjectURL(url), 500);
   toast('Project exported ✓', 'ok');
 });
@@ -1085,39 +752,32 @@ $('fileJson').addEventListener('change', async e => {
       $('vPitch').textContent = S.cfg.pitch.toFixed(2);
       $('vVol').textContent = Math.round(S.cfg.vol*100)+'%';
     }
-    renderCues(); save();
-    toast('Project loaded ✓', 'ok');
-  } catch(err){
-    toast('Bad JSON', 'err');
-  }
+    renderCues(); save(); toast('Project loaded ✓', 'ok');
+  } catch(err){ toast('Bad JSON', 'err'); }
   e.target.value = '';
 });
 
-// bottom bar
 $('btnPlayAll').addEventListener('click', playAll);
 $('btnStop').addEventListener('click', stopAll);
 
-// keyboard
 document.addEventListener('keydown', e => {
   if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') return;
-  if (e.code === 'Escape'){
-    $('ovl').classList.remove('on');
-    stopAll();
-  }
-  if (e.code === 'Space' && !e.target.closest('button')){
-    e.preventDefault();
-    S.playing ? stopAll() : playAll();
-  }
+  if (e.code === 'Escape'){ $('ovl').classList.remove('on'); stopAll(); }
 });
 
-/* ═══════════════════════════════════════════════
-   INIT
-   ═══════════════════════════════════════════════ */
+/* ═══ INIT ═══ */
 window.addEventListener('load', () => {
   load();
   renderCues();
-  setTimeout(loadVoices, 300);
-  console.log('%c Recap Studio ', 'background:#f5c518;color:#000;font-weight:900;padding:3px 8px;border-radius:4px');
+  bootVoices();
+  // second attempt after 1.5s (belt and suspenders)
+  setTimeout(bootVoices, 1500);
+  // third after user may have interacted
+  document.addEventListener('click', function once(){
+    document.removeEventListener('click', once);
+    if (!S.voicesReady) bootVoices();
+  }, { once: true });
+  console.log('%c Recap Studio v2 ', 'background:#f5c518;color:#000;font-weight:900;padding:3px 8px;border-radius:4px');
 });
 </script>
 </body>
